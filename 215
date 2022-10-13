@@ -1,0 +1,27 @@
+def heapify(nums, n, i):
+    great=i
+    l= 2*i+1
+    r= 2*i+2
+    if l<n and nums[i]<nums[l]:
+        great= l
+    if r<n and nums[great]<nums[r]:
+        great= r
+        
+    if great!= i:
+        (nums[i], nums[great])= (nums[great],nums[i])
+        heapify(nums, n, great)
+
+def heapsort(nums):
+    n= len(nums)
+    for i in range (n//2-1, -1, -1):
+        heapify(nums,n, i)
+    for i in range(n-1, 0, -1):
+        (nums[i], nums[0])= (nums[0], nums[i])
+        heapify(nums, i, 0)
+
+class Solution(object):
+    def findKthLargest(self, nums, k):
+        n= len(nums)
+        heapsort(nums)
+        return nums[n-k]
+        
